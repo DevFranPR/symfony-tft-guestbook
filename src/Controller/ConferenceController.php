@@ -30,7 +30,7 @@ class ConferenceController extends AbstractController
         ]));
     }
     /**
-     * @Route("/conference/{id}", name="conference")
+     * @Route("/conference/{slug}", name="conference")
      */
     public function show(Conference $conference, CommentRepository $commentRepository,ConferenceRepository $conferenceRepository): Response
     {
@@ -38,7 +38,7 @@ class ConferenceController extends AbstractController
         return new Response($this->twig->render('conference/show.html.twig', [
             'conferences' => $conferenceRepository->findAll(),
             'conference' => $conference,
-            'comments' => $commentRepository->findBy(['conference' => $conference], ['createdAt' => 'DESC']),
+            'comments' => $commentRepository->findBy(['conference' => $conference], ['createdAt' => 'DESC'])
         ]));
     }
 }
